@@ -1,0 +1,30 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tashee IT HelpDesk Management System</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Tashee IT HelpDesk Management System</h1>
+    </header>
+
+    <main>
+        <section class="welcome">
+            <h2>Welcome to IT Support</h2>
+            <p>
+                Report technical problems and get support
+                from your IT team.
+            </p>
+
+            <h2>How can we help you?</h2>
+            <a href="/ticket"><button type="button">Create a Support Ticket</button></a>
+            <button type="button">Track My Ticket</button>
+        </section>
+    </main>
+</body>
+</html>

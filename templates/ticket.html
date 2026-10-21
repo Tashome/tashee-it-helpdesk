@@ -1,0 +1,59 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Support Ticket</title>
+    <link rel="stylesheet"
+          href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>Tashee IT HelpDesk Management System</h1>
+    </header>
+
+    <main>
+        <section class="welcome">
+            <h2>Create a Support Ticket</h2>
+
+            <form method="POST" action="/ticket">
+                <label for="title">Problem Title</label><br>
+                <input type="text" id="title" name="title"
+                       required maxlength="100"><br><br>
+
+                <label for="category">Category</label><br>
+                <select id="category" name="category" required>
+                    <option value="">Select a category</option>
+                    <option value="Hardware">Hardware</option>
+                    <option value="Software">Software</option>
+                    <option value="Network">Network</option>
+                    <option value="Account Access">Account Access</option>
+                </select><br><br>
+
+                <label for="priority">Priority</label><br>
+                <select id="priority" name="priority" required>
+                    <option value="">Select priority</option>
+                    <option value="Low">Low</option>
+                    <option value="Medium">Medium</option>
+                    <option value="High">High</option>
+                    <option value="Critical">Critical</option>
+                </select><br><br>
+
+                <label for="description">Problem Description</label><br>
+                <textarea id="description" name="description"
+                          rows="5" maxlength="2000"
+                          required></textarea><br><br>
+
+                <label for="location">Office or Department</label><br>
+                <input type="text" id="location" name="location"
+                       maxlength="100" required><br><br>
+
+                <button type="submit">Submit Ticket</button>
+            </form>
+
+            <p><a href="/">Back to Home</a></p>
+        </section>
+    </main>
+</body>
+</html>
