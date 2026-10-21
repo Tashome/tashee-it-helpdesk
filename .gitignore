@@ -7,3 +7,6 @@ __pycache__/
 instance/
 .pytest_cache/
 .vscode/
+
+tickets.db
+*.db

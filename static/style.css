@@ -57,3 +57,46 @@ button {
 button:hover {
     background-color: #0f4f85;
 }
+
+/* Dashboard layout */
+.dashboard-cards {
+    display: grid;
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+    gap: 20px;
+    margin: 25px 0;
+}
+
+.dashboard-cards .card {
+    background: #ffffff;
+    padding: 24px 16px;
+    border-radius: 12px;
+    text-align: center;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+    border-top: 4px solid #2563eb;
+}
+
+.dashboard-cards .card h3 {
+    font-size: 16px;
+    color: #475569;
+    margin-top: 0;
+}
+
+.dashboard-cards .card p {
+    font-size: 32px;
+    font-weight: bold;
+    color: #1d4ed8;
+    margin-bottom: 0;
+}
+
+/* Responsive layout for phones and tablets */
+@media (max-width: 800px) {
+    .dashboard-cards {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+}
+
+@media (max-width: 450px) {
+    .dashboard-cards {
+        grid-template-columns: 1fr;
+    }
+}
