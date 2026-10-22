@@ -18,6 +18,7 @@
             <h2>Create a Support Ticket</h2>
 
             <form method="POST" action="/ticket">
+                <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
                 <label for="title">Problem Title</label><br>
                 <input type="text" id="title" name="title"
                        required maxlength="100"><br><br>

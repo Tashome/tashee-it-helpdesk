@@ -17,6 +17,62 @@
         <section class="welcome">
             <h2>All Support Tickets</h2>
 
+            <!-- Search and filter form -->
+            <form method="GET" action="{{ url_for('view_tickets') }}">
+                <label for="search">Search tickets:</label>
+                <input
+                    type="text"
+                    id="search"
+                    name="search"
+                    placeholder="Title, description, or location"
+                    value="{{ search }}"
+                >
+
+                <label for="status">Status:</label>
+                <select id="status" name="status">
+                    <option value="">All statuses</option>
+                    <option value="Open"
+                        {% if selected_status == "Open" %}selected{% endif %}>
+                        Open
+                    </option>
+                    <option value="In Progress"
+                        {% if selected_status == "In Progress" %}selected{% endif %}>
+                        In Progress
+                    </option>
+                    <option value="Resolved"
+                        {% if selected_status == "Resolved" %}selected{% endif %}>
+                        Resolved
+                    </option>
+                </select>
+
+                <label for="priority">Priority:</label>
+                <select id="priority" name="priority">
+                    <option value="">All priorities</option>
+                    {% for item in priorities %}
+                    <option value="{{ item }}"
+                        {% if selected_priority == item %}selected{% endif %}>
+                        {{ item }}
+                    </option>
+                    {% endfor %}
+                </select>
+
+                <label for="category">Category:</label>
+                <select id="category" name="category">
+                    <option value="">All categories</option>
+                    {% for item in categories %}
+                    <option value="{{ item }}"
+                        {% if selected_category == item %}selected{% endif %}>
+                        {{ item }}
+                    </option>
+                    {% endfor %}
+                </select>
+
+                <button type="submit">Search / Filter</button>
+                <a href="{{ url_for('view_tickets') }}">Clear filters</a>
+            </form>
+
+            <p>Tickets found: {{ tickets|length }}</p>
+
             {% if tickets %}
             <table>
                 <thead>
@@ -28,7 +84,7 @@
                         <th>Description</th>
                         <th>Location</th>
                         <th>Status</th>
-<th>Update Status</th>
+                        <th>Update Status</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -41,32 +97,33 @@
                         <td>{{ ticket["description"] }}</td>
                         <td>{{ ticket["location"] }}</td>
                         <td>{{ ticket["status"] }}</td>
-<td>
-    <form method="POST"
-          action="{{ url_for('update_ticket_status', ticket_id=ticket['id']) }}">
-        <select name="status" required>
-            <option value="Open"
-                {% if ticket["status"] == "Open" %}selected{% endif %}>
-                Open
-            </option>
-            <option value="In Progress"
-                {% if ticket["status"] == "In Progress" %}selected{% endif %}>
-                In Progress
-            </option>
-            <option value="Resolved"
-                {% if ticket["status"] == "Resolved" %}selected{% endif %}>
-                Resolved
-            </option>
-        </select>
-        <button type="submit">Update</button>
-    </form>
-</td>
+                        <td>
+                            <form method="POST"
+                                  action="{{ url_for('update_ticket_status', ticket_id=ticket['id']) }}">
+                                  <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+                                <select name="status" required>
+                                    <option value="Open"
+                                        {% if ticket["status"] == "Open" %}selected{% endif %}>
+                                        Open
+                                    </option>
+                                    <option value="In Progress"
+                                        {% if ticket["status"] == "In Progress" %}selected{% endif %}>
+                                        In Progress
+                                    </option>
+                                    <option value="Resolved"
+                                        {% if ticket["status"] == "Resolved" %}selected{% endif %}>
+                                        Resolved
+                                    </option>
+                                </select>
+                                <button type="submit">Update</button>
+                            </form>
+                        </td>
                     </tr>
                     {% endfor %}
                 </tbody>
             </table>
             {% else %}
-            <p>No support tickets have been submitted yet.</p>
+            <p>No matching tickets found. Try changing or clearing your filters.</p>
             {% endif %}
 
             <p><a href="/">Back to Home</a></p>
